@@ -1,70 +1,18 @@
-# Getting Started with Create React App
+# Disaster Assistant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React prototype that explores earthquake monitoring, a knowledge base, and conversational assistance. It reads recent earthquakes from the [USGS GeoJSON feed](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php).
 
-## Available Scripts
+**[Try the public information demo](https://aidan-projects.nuttyoak11.chatgpt.site/demo/disaster.html).** The portfolio demo reads the USGS feed and uses fixed, source-linked safety answers. It is separate from this Firebase prototype and does not require an account or API key.
 
-In the project directory, you can run:
+## Run locally
 
-### `npm start`
+1. Run `npm install`.
+2. Copy `.env.example` to `.env.local` and fill in your own Firebase project configuration.
+3. Configure Firebase Authentication and restrictive Firestore security rules for your own project.
+4. Run `npm start`.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The browser Firebase configuration identifies a project; it does not replace Firestore rules. Never place a provider secret in a `REACT_APP_*` variable, because Create React App embeds those values in the public browser bundle. The project uses fixed local answers instead of a browser-side AI API key.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Scope and safety
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This is a learning prototype. Its earthquake data and guidance are informational, not an emergency alert system. Follow local emergency authorities for urgent help. Review all authentication and database rules before connecting it to a public Firebase project.

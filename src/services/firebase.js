@@ -1,17 +1,17 @@
 import { initializeApp } from "firebase/app";
 import { 
   getFirestore, collection, addDoc, serverTimestamp,
-  query, where, getDocs, orderBy, doc, updateDoc
+  query, where, getDocs, orderBy, doc
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth"; // Add this import
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDCtfo4bRs6RXLp1-SRo_-rXzDbP2EEGlk",
-  authDomain: "chatbot-bible.firebaseapp.com",
-  projectId: "chatbot-bible",
-  storageBucket: "chatbot-bible.firebasestorage.app",
-  messagingSenderId: "324879585238",
-  appId: "1:324879585238:web:2ee599a051b03cf4d89e77"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID
 
 };
 
@@ -22,6 +22,8 @@ const auth = getAuth(app); // Initialize auth service
 export const extractKeywords = (text) => {
   // Remove punctuation and split
   const words = text.toLowerCase()
+    // The punctuation class is kept broad for the prototype keyword matcher.
+    // eslint-disable-next-line no-useless-escape
     .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?'"]/g, '')
     .split(/\s+/);
 

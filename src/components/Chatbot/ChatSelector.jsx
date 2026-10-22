@@ -33,7 +33,10 @@ const ChatSelector = ({ currentUser, currentChatId, onSelectChat }) => {
 
         if (loadedChats.length === 0) {
           // Create first chat if none exists
-          const newChat = await createNewChat();
+          const docRef = await addDoc(collection(db, `users/${currentUser.uid}/chats`), {
+            title: 'Main Chat', createdAt: serverTimestamp()
+          });
+          const newChat = { id: docRef.id, title: 'Main Chat', createdAt: new Date() };
           setChats([newChat]);
           onSelectChat(newChat.id);
         } else {

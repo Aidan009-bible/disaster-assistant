@@ -56,7 +56,7 @@ function App() {
         <Chatbot />
       </section>
       <footer className="App-footer">
-        <p>Data provided by USGS Earthquake API and OpenAI</p>
+        <p>Earthquake data: USGS. Prepared answers are informational and not emergency alerts.</p>
       </footer>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   query, collection, where, getDocs, addDoc,
-  serverTimestamp, orderBy, doc, setDoc, limit
+  serverTimestamp, orderBy, limit
 } from 'firebase/firestore';
 import { db, extractKeywords } from '../../services/firebase';
 import { generateQnAPairs } from '../../services/qaApi';
@@ -13,7 +13,6 @@ import './Chatbot.css';
 const Chatbot = () => {
   const { currentUser } = useAuth();
   const [activeChat, setActiveChat] = useState(null);
-  const [chats, setChats] = useState([]);
   const [messages, setMessages] = useState([
     { 
       text: "Hello! I'm your disaster assistance bot. Ask me anything about earthquakes or natural disasters.", 
@@ -61,26 +60,6 @@ const Chatbot = () => {
     initializeChats();
   }, [currentUser]);
 
-  // Load all user's chats
-  useEffect(() => {
-    const fetchChats = async () => {
-      if (!currentUser) return;
-
-      try {
-        const q = query(
-          collection(db, `users/${currentUser.uid}/chats`),
-          orderBy("createdAt", "desc")
-        );
-        const snapshot = await getDocs(q);
-        setChats(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-      } catch (error) {
-        console.error("Error fetching chats:", error);
-      }
-    };
-
-    fetchChats();
-  }, [currentUser]);
-
   // Load messages for active chat
   useEffect(() => {
     const loadMessages = async () => {
@@ -115,23 +94,6 @@ const Chatbot = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
-
-  const createNewChat = async () => {
-    if (!currentUser) return;
-
-    try {
-      const newChatRef = await addDoc(
-        collection(db, `users/${currentUser.uid}/chats`),
-        {
-          title: `Chat ${chats.length + 1}`,
-          createdAt: serverTimestamp()
-        }
-      );
-      setActiveChat(newChatRef.id);
-    } catch (error) {
-      console.error("Error creating new chat:", error);
-    }
-  };
 
   const saveMessage = async (message) => {
     if (!currentUser || !activeChat) return;
